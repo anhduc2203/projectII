@@ -107,8 +107,8 @@
                             </ul>	
                             <div class="down-top">		
                                 <select class="in-drop">
-                                    <option value="Dollars" class="in-of">VND</option>
-                                    <option value="Euro" class="in-of">Dollar</option>                                   
+                                    <option value="VND" class="in-of">VND</option>
+                                    <option value="Dollar" class="in-of">Dollar</option>                                   
                                 </select>
                             </div>
                             <div class="search">
