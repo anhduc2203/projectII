@@ -67,7 +67,8 @@
                                 <option value="null">Select a Country</option>                           
                                 <option value="SN">Viet Nam</option>
                             </select>
-                        </div>
+                        </div> 
+                        <button class="grey" type="hidden" value="login" name="command"></button>
                         <button class="grey">Create Account</button>
 
                         <p class="terms">By clicking 'Create Account' you agree to the <a href="#">Terms &amp; Conditions</a>.</p>
