@@ -10,7 +10,7 @@ package model;
  * @author unknown_HUST
  */
 public class Account {
-    public long userCode;
+    public String userCode;
     public String userName;
     public String userPass;
     public String userRole;
@@ -24,7 +24,7 @@ public class Account {
     public Account() {
     }
   
-    public Account(long userCode, String userName, String userPass, String userRole, String fullName, String cityOrSchool, String userEmail, String phoneNumber, String userAddres, String userCountry) {
+    public Account(String userCode, String userName, String userPass, String userRole, String fullName, String cityOrSchool, String userEmail, String phoneNumber, String userAddres, String userCountry) {
         this.userCode = userCode;
         this.userName = userName;
         this.userPass = userPass;
@@ -37,11 +37,11 @@ public class Account {
         this.userCountry = userCountry;
     }
 
-    public long getUserCode() {
+    public String getUserCode() {
         return userCode;
     }
 
-    public void setUserCode(long userCode) {
+    public void setUserCode(String userCode) {
         this.userCode = userCode;
     }
 

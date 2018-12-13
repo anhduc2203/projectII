@@ -65,11 +65,13 @@
                         <div><input type="text" name="address" id="address" value="Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Address';}"></div>
                         <div><select id="country" name="country" onchange="change_country(this.value)" class="frm-field required">
                                 <option value="null">Select a Country</option>                           
-                                <option value="SN">Viet Nam</option>
+                                <option value="Viet Nam">Viet Nam</option>
+                                <option value="Korea">Korea</option>
+                                <option value="USA">USA</option>
                             </select>
                         </div> 
-                        <button class="grey" type="hidden" value="login" name="command"></button>
-                        <button class="grey">Create Account</button>
+                        <button class="grey" type="hidden" value="register" name="command">Create Account</button>
+                        <!--button class="grey">Create Account</button-->
 
                         <p class="terms">By clicking 'Create Account' you agree to the <a href="#">Terms &amp; Conditions</a>.</p>
                     </div>

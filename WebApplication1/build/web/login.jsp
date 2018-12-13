@@ -38,11 +38,17 @@
                     <div class="login-title">
                         <h4 class="title">Đăng nhập</h4>
                         <div id="loginbox" class="loginbox">
-                            <form action="" method="post" name="login" id="login-form">
+                            <form action="AccountServlet" method="post" name="login" id="login-form">
+                                
+                                <%if (request.getParameter("error") != null) {%>
+                                <div>
+                                    <p style="color: red"><%=request.getParameter("error") %></p>
+                                </div>
+                                <%}%>
                                 <fieldset class="input">
                                     <p id="login-form-username">
                                         <label for="modlgn_username">Tên đăng nhập</label>
-                                        <input id="modlgn_username" type="text" name="email" class="inputbox" size="18" autocomplete="off">
+                                        <input id="modlgn_username" type="text" name="username" class="inputbox" size="18" autocomplete="off">
                                     </p>
                                     <p id="login-form-password">
                                         <label for="modlgn_passwd">Mật khẩu</label>
@@ -52,7 +58,8 @@
                                         <p id="login-form-remember">
                                             <label for="modlgn_remember"><a href="#">Forget Your Password ? </a></label>
                                         </p>
-                                        <input type="submit" name="Submit" class="button" value="Login">
+                                        <button class="grey" type="hidden" value="login" name="command">Login</button>
+                                        
                                         <div class="clear"></div>
                                     </div>
                                 </fieldset>

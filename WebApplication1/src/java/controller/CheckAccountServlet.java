@@ -34,11 +34,11 @@ public class CheckAccountServlet extends HttpServlet {
         System.out.println("\nOutput: "+request.getParameter("username")+"\n");
         try {
             if (accountDAO.checkAccount(request.getParameter("username"))) {
-                System.out.println("\nOutput thanh cong: "+request.getParameter("username")+"\n");
+                System.out.println("\nTài khoản bị trùng: "+request.getParameter("username")+"\n");
                 String path = "<img src=\"img_controller/not-available.png\" />";
                 response.getWriter().write(path);
             } else {
-                System.out.println("\nOutput bi trung: "+request.getParameter("username")+"\n");
+                System.out.println("\nThao tác thành công: "+request.getParameter("username")+"\n");
                 String path = "<img src=\"./img_controller/available.png\" />";
                 response.getWriter().write(path);
             }

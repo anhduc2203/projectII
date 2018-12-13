@@ -4,7 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/DA2/projectII/WebApplication1/src/java/dao/AccountDAO.java</file>
+            <file>file:/D:/DA2/projectII/WebApplication1/web/login.jsp</file>
+            <file>file:/D:/DA2/projectII/WebApplication1/web/register.jsp</file>
             <file>file:/D:/DA2/projectII/WebApplication1/src/java/controller/AccountServlet.java</file>
+            <file>file:/D:/DA2/projectII/WebApplication1/src/java/controller/CheckAccountServlet.java</file>
+            <file>file:/D:/DA2/projectII/WebApplication1/src/java/model/Account.java</file>
         </group>
     </open-files>
 </project-private>

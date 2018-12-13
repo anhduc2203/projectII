@@ -8,7 +8,6 @@ package dao;
 
 import connect.ConnectDB;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -57,10 +56,9 @@ public class AccountDAO {
         String sql = "INSERT INTO USERS VALUES(?,?,?,?,?,?,?,?,?,?)";
         ResultSet rs = null;
         try {
-            PreparedStatement ps = connection.prepareCall(sql);
-                        
-            ps.setLong(1, 14);
-            
+            PreparedStatement ps;
+            ps = connection.prepareCall(sql);
+            ps.setString(1, acc.getUserCode());
             ps.setString(2, acc.getUserName());
             ps.setString(3, acc.getUserPass());
             ps.setString(4, acc.getUserRole());
@@ -80,7 +78,48 @@ public class AccountDAO {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        /*
+        
+    }
+    
+    // Xử lí đăng nhập
+    public Account login(String username, String pass) throws ClassNotFoundException{
+        Connection conn = ConnectDB.getConnectionDB();
+        String sql = "select * from USERS where UserName=? and Pass=?";
+        ResultSet rs = null;
+        try {
+            PreparedStatement ps = conn.prepareCall(sql);
+            ps.setString(1, username);
+            ps.setString(2, pass);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                Account acc = new Account();
+                acc.setUserCode(rs.getString("UserCode"));
+                acc.setUserName(rs.getString("UserName"));
+                acc.setUserPass(rs.getString("Pass"));
+                acc.setFullName(rs.getString("Name"));
+                acc.setCityOrSchool(rs.getString("ctyOrSchool"));
+                acc.setUserEmail(rs.getString("Email"));
+                acc.setPhoneNumber("PhoneNumber");
+                acc.setUserAddres(rs.getString("Address"));
+                acc.setUserCountry(rs.getString("Country"));
+                String un = acc.getUserName();
+                String pa = acc.getUserPass();
+                System.out.println("UN: "+un+"PS: "+pa);
+                conn.close();
+                ps.close();
+                return acc;
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+}
+
+
+/*
         
         Connection conn = null;
         String dbName = "BOOKSHOP2";
@@ -119,6 +158,3 @@ public class AccountDAO {
             ex.printStackTrace();
         }
         */
-    }
-    
-}
