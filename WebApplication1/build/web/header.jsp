@@ -4,6 +4,8 @@
     Author     : unknown_HUST
 --%>
 
+<%@page import="model.Category"%>
+<%@page import="dao.CategoryDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -30,6 +32,11 @@
         <script src="js/jquery.easydropdown.js"></script>
     </head>
     <body>
+
+        <%
+            CategoryDAO categoryDAO = new CategoryDAO();
+        %>
+
         <div class="header-top">
             <div class="wrap">
                 <div class="header-top-left">
@@ -77,14 +84,17 @@
                                             <div class="h_nav">
                                                 <h4>Contact </h4>
                                                 <ul>
-                                                    <li><a href="womens.html">Programing</a></li>
-                                                    <li><a href="womens.html">Science and Technology</a></li>
-                                                    <li><a href="womens.html">Math Book </a></li>
-                                                    <li><a href="womens.html">Orther</a></li>
+                                                    <%
+                                                        for (Category c : categoryDAO.getCategory()) {
+                                                    %>
+                                                    <li><a href="engbook.jsp?category=<%=c.getCategoryID() %>"><%=c.getCategoryName() %></a></li>
+                                                    <%
+                                                        }
+                                                    %>
                                                 </ul>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </li>
@@ -101,7 +111,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </li>
                             <li><a class="color6" href="other.jsp">Other</a></li>
@@ -150,6 +160,6 @@
                 <div class="clear"></div>
             </div>
         </div>
-       
+
     </body>
 </html>

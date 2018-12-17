@@ -42,6 +42,7 @@ public class AccountServlet extends HttpServlet {
         String url = "";
         Account acc = new Account();
         AccountDAO accDAO = new AccountDAO();
+        
         HttpSession session = request.getSession();
         switch (command) {
             case "register":

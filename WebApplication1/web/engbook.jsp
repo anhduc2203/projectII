@@ -4,6 +4,9 @@
     Author     : unknown_HUST
 --%>
 
+
+<%@page import="dao.BookDAO"%>
+<%@page import="dao.CategoryDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,13 +32,26 @@
         </script>
     </head>
     <body>
+        
+        <%
+            CategoryDAO categoryDAO = new CategoryDAO();
+            BookDAO bookDAO = new BookDAO();
+            String categoryID = "";
+            if(request.getParameter("category") != null){
+                categoryID = request.getParameter("category");
+            }
+        %>
+        
         <jsp:include page="header.jsp"></jsp:include>
 
         <div class="mens">
             <div class="main">
                 <div class="wrap">
                     <div class="cont span_2_of_3">
-                        <h2 class="head">Men's</h2>
+                        <%
+                            String s = categoryDAO.getCategory(Integer.parseInt(categoryID));
+                        %>
+                        <h2 class="head"><%=s %></h2>
                         <div class="mens-toolbar">
                             <div class="sort">
                                 <div class="sort-by">
