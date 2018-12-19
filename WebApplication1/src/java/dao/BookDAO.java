@@ -47,5 +47,35 @@ public class BookDAO {
         return list;
     }
     
+    
+    //lay thong tin san pham theo ma san pham:
+    public Book getBookByBookID(String bookID) throws ClassNotFoundException{
+        Connection conn = ConnectDB.getConnectionDB();
+        String sql = "SELECT * FROM dbo.BOOK WHERE BookCode='"+bookID+"'";
+        Book b = new Book();
+        
+        try {
+            PreparedStatement ps = conn.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Book book = new Book();
+                book.setBookCode(rs.getString("BookCode"));
+                book.setBookName(rs.getString("Name"));
+                book.setBookPrice(rs.getFloat("Price"));
+                book.setAuthor(rs.getString("Author"));
+                book.setNxb(rs.getString("NXB"));
+                book.setBookCategory(rs.getInt("BookCategoryID"));
+                book.setBookDescription(rs.getString("BookDesciption"));
+                book.setBookImage(rs.getString("BookImage"));
+                //list.add(book);
+                b = book;
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return b;
+    }
+    
 
 }
