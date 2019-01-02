@@ -12,6 +12,10 @@
         <servlet-name>AccountDAO</servlet-name>
         <servlet-class>dao.AccountDAO</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>controller.CartServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AccountServlet</servlet-name>
         <url-pattern>/AccountServlet</url-pattern>
@@ -24,7 +28,10 @@
         <servlet-name>AccountDAO</servlet-name>
         <url-pattern>/AccountDAO</url-pattern>
     </servlet-mapping>
-        
+    <servlet-mapping>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/CartServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             100

@@ -5,7 +5,6 @@
 --%>
 
 
-<%@page import="model.Cart"%>
 <%@page import="model.Author"%>
 <%@page import="dao.AuthorDAO"%>
 <%@page import="model.Category"%>
@@ -42,14 +41,9 @@
             CategoryDAO categoryDAO = new CategoryDAO();
             BookDAO bookDAO = new BookDAO();
             AuthorDAO authorDAO = new AuthorDAO();
-            String categoryID = "";
-            if(request.getParameter("category") != null){
-                categoryID = request.getParameter("category");
-            }
-            Cart cart = (Cart) session.getAttribute("cart");
-            if(cart == null){
-                cart = new Cart();
-                session.setAttribute("cart", cart);
+            String authorID = "";
+            if(request.getParameter("author") != null){
+                authorID = request.getParameter("author");
             }
         %>
         
@@ -60,7 +54,7 @@
                 <div class="wrap">
                     <div class="cont span_2_of_3">
                         <%
-                            String s = categoryDAO.getCategory(Integer.parseInt(categoryID));
+                            String s = categoryDAO.getCategory(Integer.parseInt(authorID));
                         %>
                         <h2 class="head"><%=s %></h2>
                         <div class="mens-toolbar">
@@ -101,7 +95,7 @@
                         </div>
                         
                         <%
-                            int size = bookDAO.getListBookByCategory(Integer.parseInt(categoryID)).size();
+                            int size = bookDAO.getListBookByAuthor(Integer.parseInt(authorID)).size();
                             int sohang, sodu;
                             
                             if((size%3) == 0){
@@ -115,12 +109,12 @@
                             <%
                                 //bookDAO.getListBookByCategory(Integer.parseInt(categoryID)).get(index);
                                 for(int j = i*3; j < (i*3+3); j++){
-                                    Book b = bookDAO.getListBookByCategory(Integer.parseInt(categoryID)).get(j);
+                                    Book b = bookDAO.getListBookByAuthor(Integer.parseInt(authorID)).get(j);
                                     if(b == null) break;
                             %>
                             
                             <div class="col_1_of_3 span_1_of_3">
-                                
+                                <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                     <div class="inner_content clearfix">
                                         <div class="product_image">
                                             <img src="<%=b.getBookImage() %>" alt="<%=b.getBookName() %>" />
@@ -132,13 +126,11 @@
                                                     <span class="actual">$<%=b.getBookPrice() %></span>
                                                 </div>
                                             </div>
-                                            <div class="cart-right"> 
-                                                <a href="CartServlet?command=plus&bookID=<%=b.getBookCode() %>"></a>
-                                            </div>
+                                            <div class="cart-right"> </div>
                                             <div class="clear"></div>
                                         </div>
                                     </div>
-                                
+                                </a>
                             </div>
                             <%
                                 }
@@ -160,7 +152,7 @@
                             <%
                                 //bookDAO.getListBookByCategory(Integer.parseInt(categoryID)).get(index);
                                 for(int j = k*3; j < (k*3+3); j++){
-                                    Book b = bookDAO.getListBookByCategory(Integer.parseInt(categoryID)).get(j);
+                                    Book b = bookDAO.getListBookByAuthor(Integer.parseInt(authorID)).get(j);
                                     if(b == null) break;
                             %>
                             
@@ -228,7 +220,7 @@
                                         <%
                                             for(Author author : authorDAO.getAuthor()){
                                         %>
-                                        <li><a href="engbookbyauthor.jsp?author=<%=author.getAuthorID() %>"><%=author.getAuthorName() %></a></li>
+                                        <li><a href="engbook.jsp?author=<%=author.getAuthorID() %>"><%=author.getAuthorName() %></a></li>
                                         <%
                                             }
                                         %>
@@ -301,3 +293,6 @@
         <jsp:include page="footer.jsp"></jsp:include>
     </body>
 </html>
+
+
+

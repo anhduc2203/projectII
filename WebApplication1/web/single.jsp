@@ -4,6 +4,9 @@
     Author     : unknown_HUST
 --%>
 
+<%@page import="dao.AuthorDAO"%>
+<%@page import="model.Author"%>
+<%@page import="model.Category"%>
 <%@page import="model.Book"%>
 <%@page import="dao.BookDAO"%>
 <%@page import="dao.CategoryDAO"%>
@@ -68,6 +71,7 @@
         <%
             CategoryDAO categoryDAO = new CategoryDAO();
             BookDAO bookDAO = new BookDAO();
+            AuthorDAO authorDAO = new AuthorDAO();
             String bookID = "";
             if(request.getParameter("bookID") != null){
                 bookID = request.getParameter("bookID");
@@ -79,18 +83,19 @@
         <div class="mens">
             <div class="main">
                 <div class="wrap">
-                    <ul class="breadcrumb breadcrumb__t"><a class="home" href="#">Home</a> / <a href="#">Dolor sit amet</a> / Lorem
-                        ipsum dolor sit amet</ul>
+                <%
+                    Book b = bookDAO.getBookByBookID(bookID);
+                    String category = categoryDAO.getCategory(b.getBookCategory());
+                    String aut = authorDAO.getAuthorByID(b.getAuthor());
+                %>
+                <ul class="breadcrumb breadcrumb__t"><a class="home" href="index.jsp">Home</a> / <a href="engbook.jsp?category=<%=b.getBookCategory() %>"><%=category %></a> / <%=b.getBookName() %></ul>
                     <div class="cont span_2_of_3">
-                        <%
-                            Book b = bookDAO.getBookByBookID(bookID);
-                        %>
                         <div class="grid images_3_of_2">
                             <img src="<%=b.getBookImage() %>" alt="<%=b.getBookName() %>" />
 <!--                            <ul id="etalage">
                                 <li>
                                     <a href="optionallink.html">
-                                        <img class="etalage_thumb_image" src="<%=b.getBookImage() %>" class="img-responsive" />
+                                        <img class="etalage_thumb_image" src="" class="img-responsive" />
                                          <img class="etalage_source_image" src="images/s1.jpg" class="img-responsive" title="" />
                                     </a>
                                 </li>
@@ -99,7 +104,8 @@
                         </div>
                         <div class="desc1 span_3_of_2">
                             <h3 class="m_3"><%=b.getBookName() %></h3>
-                            <p class="m_5">$<%=b.getBookPrice() %> <a href="#">click for offer</a></p>
+                            <p class="m_text2">Author: <%=aut %> </p>
+                            <p class="m_5">Price: $<%=b.getBookPrice() %> <a href="#">click for offer</a></p>
                             <div class="btn_form">
                                 <form>
                                     <input type="submit" value="buy" title="">
@@ -110,24 +116,26 @@
                         </div>
                         <div class="clear"></div>
                         <div class="clients">
-                            <h3 class="m_3">10 Other Products in the same category</h3>
-                            <ul id="flexiselDemo3">
-                                <li><img src="images/s5.jpg" /><a href="#">Category</a>
-                                    <p>Rs 600</p>
-                                </li>
-                                <li><img src="images/s6.jpg" /><a href="#">Category</a>
-                                    <p>Rs 850</p>
-                                </li>
-                                <li><img src="images/s7.jpg" /><a href="#">Category</a>
-                                    <p>Rs 900</p>
-                                </li>
-                                <li><img src="images/s8.jpg" /><a href="#">Category</a>
-                                    <p>Rs 550</p>
-                                </li>
-                                <li><img src="images/s9.jpg" /><a href="#">Category</a>
-                                    <p>Rs 750</p>
-                                </li>
-                            </ul>
+                            <h3 class="m_3">Other Books in the same category</h3>
+                            <div class="nbs-flexisel-container">
+                                <div class="nbs-flexisel-inner">
+                                    <ul id="flexiselDemo3" class="nbs-flexisel-ul" style="left: -187.4px; display: block;">
+                                        <%
+                                            for(Book b2 : bookDAO.getListBookByCategory(b.getBookCategory())){
+                                        %>
+                                        <a href="single.jsp?bookID=<%=b2.getBookCode() %>">
+                                            <li class="nbs-flexisel-item" style="width: 187.4px;"><img src="<%=b2.getBookImage()%>">
+                                                <p>$ <%=b2.getBookPrice()%></p>
+                                            </li>
+                                        </a>
+                                        <%
+                                            }
+                                        %>
+                                    </ul>
+                                    <div class="nbs-flexisel-nav-left" style="top: 88px;"></div>
+                                    <div class="nbs-flexisel-nav-right" style="top: 88px;"></div>
+                                </div>
+                            </div>
                             <script type="text/javascript">
                                     $(window).load(function () {
                                             $("#flexiselDemo1").flexisel();
@@ -185,25 +193,48 @@
                             <p class="m_text"><%=b.getBookDescription() %>.</p>
                         </div>
                     </div>
+                        
+                        
+                        
                     <div class="rsingle span_1_of_single">
                         <h5 class="m_1">Categories</h5>
-                        <select class="dropdown" tabindex="8" data-settings='{"wrapperClass":"metro"}'>
-                            <option value="1">Mens</option>
-                            <option value="2">Sub Category1</option>
-                            <option value="3">Sub Category2</option>
-                            <option value="4">Sub Category3</option>
-                        </select>
-                        <select class="dropdown" tabindex="8" data-settings='{"wrapperClass":"metro"}'>
-                            <option value="1">Womens</option>
-                            <option value="2">Sub Category1</option>
-                            <option value="3">Sub Category2</option>
-                            <option value="4">Sub Category3</option>
-                        </select>
                         <ul class="kids">
-                            <li><a href="#">Kids</a></li>
-                            <li class="last"><a href="#">Glasses Shop</a></li>
+                            <%
+                                for(Category c : categoryDAO.getCategory()){
+                            %>
+                            <li><a href="engbook.jsp?category=<%=c.getCategoryID() %>"><%=c.getCategoryName() %></a></li>
+                            <%
+                                }
+                            %>
                         </ul>
+<!--             //            <section class="sky-form">
+                            <h4>Price</h4>
+                            <div class="row row1 scroll-pane">
+                                <div class="col col-4">
+                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>... - $50</label>
+                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>$50 - $100</label>
+                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>$100 - ...</label>
+                                </div>
+                                <input type="button" >
+                            </div>
+                        </section>-->
                         <section class="sky-form">
+                            <h4>Author Name</h4>
+                            <div class="row row1 scroll-pane">
+                                <div class="col col-4">
+                                    <ul class="kids">
+                                        <%
+                                            for(Author author : authorDAO.getAuthor()){
+                                        %>
+                                        <li><a href="engbookbyauthor.jsp?author=<%=author.getAuthorID() %>"><%=author.getAuthorName() %></a></li>
+                                        <%
+                                            }
+                                        %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+<!--                        <section class="sky-form">
                             <h4>Price</h4>
                             <div class="row row1 scroll-pane">
                                 <div class="col col-4">
@@ -227,8 +258,8 @@
                                     <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 8000 - Rs 8500</label>
                                 </div>
                             </div>
-                        </section>
-                        <section class="sky-form">
+                        </section>-->
+<!--                        <section class="sky-form">
                             <h4>Brand Name</h4>
                             <div class="row row1 scroll-pane">
                                 <div class="col col-4">
@@ -252,8 +283,8 @@
                                     <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Animal</label>
                                 </div>
                             </div>
-                        </section>
-                        <section class="sky-form">
+                        </section>-->
+<!--                        <section class="sky-form">
                             <h4>Frame Shape</h4>
                             <div class="row row1 scroll-pane">
                                 <div class="col col-4">
@@ -268,8 +299,8 @@
                                     <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Wrap Around</label>
                                 </div>
                             </div>
-                        </section>
-                        <section class="sky-form">
+                        </section>-->
+<!--                        <section class="sky-form">
                             <h4>Frame Size</h4>
                             <div class="row row1 scroll-pane">
                                 <div class="col col-4">
@@ -282,8 +313,8 @@
                                     <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Large</label>
                                 </div>
                             </div>
-                        </section>
-                        <section class="sky-form">
+                        </section>-->
+<!--                        <section class="sky-form">
                             <h4>Frame Type</h4>
                             <div class="row row1 scroll-pane">
                                 <div class="col col-4">
@@ -296,8 +327,8 @@
                                     <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Half Rim</label>
                                 </div>
                             </div>
-                        </section>
-                        <section class="sky-form">
+                        </section>-->
+<!--                        <section class="sky-form">
                             <h4>Colors</h4>
                             <ul class="color-list">
                                 <li><a href="#"> <span class="color1"> </span>
@@ -322,10 +353,11 @@
                                         <p class="red">Gray</p>
                                     </a></li>
                             </ul>
-                        </section>
+                        </section>-->
                         <script src="js/jquery.easydropdown.js"></script>
-                    </div <div class="clear">
-                    </div>
+                    </div> 
+                        <div class="clear">
+                        </div>
                 </div>
                 <div class="clear"></div>
             </div>

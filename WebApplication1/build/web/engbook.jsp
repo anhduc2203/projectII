@@ -5,6 +5,10 @@
 --%>
 
 
+<%@page import="model.Cart"%>
+<%@page import="model.Author"%>
+<%@page import="dao.AuthorDAO"%>
+<%@page import="model.Category"%>
 <%@page import="model.Book"%>
 <%@page import="dao.BookDAO"%>
 <%@page import="dao.CategoryDAO"%>
@@ -37,9 +41,15 @@
         <%
             CategoryDAO categoryDAO = new CategoryDAO();
             BookDAO bookDAO = new BookDAO();
+            AuthorDAO authorDAO = new AuthorDAO();
             String categoryID = "";
             if(request.getParameter("category") != null){
                 categoryID = request.getParameter("category");
+            }
+            Cart cart = (Cart) session.getAttribute("cart");
+            if(cart == null){
+                cart = new Cart();
+                session.setAttribute("cart", cart);
             }
         %>
         
@@ -110,7 +120,7 @@
                             %>
                             
                             <div class="col_1_of_3 span_1_of_3">
-                                <a href="single.jsp?bookID=<%=b.getBookCode() %>">
+                                
                                     <div class="inner_content clearfix">
                                         <div class="product_image">
                                             <img src="<%=b.getBookImage() %>" alt="<%=b.getBookName() %>" />
@@ -122,11 +132,13 @@
                                                     <span class="actual">$<%=b.getBookPrice() %></span>
                                                 </div>
                                             </div>
-                                            <div class="cart-right"> </div>
+                                            <div class="cart-right"> 
+                                                <a href="CartServlet?command=plus&bookID=<%=b.getBookCode() %>"></a>
+                                            </div>
                                             <div class="clear"></div>
                                         </div>
                                     </div>
-                                </a>
+                                
                             </div>
                             <%
                                 }
@@ -177,125 +189,55 @@
                             <div class="clear"></div>
                         </div>
                             
-                        <%
-                            }
-                            for(int j = k*3; j < (k*3+sodu); j++){
-                                    Book b = bookDAO.getListBookByCategory(Integer.parseInt(categoryID)).get(j);
-                                    if(b == null) break;
-                        %>
-                            
-                            <div class="col_1_of_3 span_1_of_3">
-                                <a href="single.jsp?bookID=<%=b.getBookCode() %>">
-                                    <div class="inner_content clearfix">
-                                        <div class="product_image">
-                                            <img src="<%=b.getBookImage() %>" alt="<%=b.getBookName() %>" />
-                                        </div>
-                                        <div class="price">
-                                            <div class="cart-left">
-                                                <p class="title"><%=b.getBookName() %></p>
-                                                <div class="price1">
-                                                    <span class="actual">$<%=b.getBookPrice() %></span>
-                                                </div>
-                                            </div>
-                                            <div class="cart-right"> </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+                        
                         <%
                                 }
                             }
                         %>
                         
                     </div>
+                        
+                        
                     <div class="rsidebar span_1_of_left">
                         <h5 class="m_1">Categories</h5>
-                        <select class="dropdown" tabindex="8" data-settings='{"wrapperClass":"metro"}'>
-                            <option value="1">Mens</option>
-                            <option value="2">Sub Category1</option>
-                            <option value="3">Sub Category2</option>
-                            <option value="4">Sub Category3</option>
-                        </select>
-                        <select class="dropdown" tabindex="8" data-settings='{"wrapperClass":"metro"}'>
-                            <option value="1">Womens</option>
-                            <option value="2">Sub Category1</option>
-                            <option value="3">Sub Category2</option>
-                            <option value="4">Sub Category3</option>
-                        </select>
                         <ul class="kids">
-                            <li><a href="#">Kids</a></li>
-                            <li class="last"><a href="#">Glasses Shop</a></li>
+                            <%
+                                for(Category c : categoryDAO.getCategory()){
+                            %>
+                            <li><a href="engbook.jsp?category=<%=c.getCategoryID() %>"><%=c.getCategoryName() %></a></li>
+                            <%
+                                }
+                            %>
                         </ul>
-                        <section class="sky-form">
+<!--             //            <section class="sky-form">
                             <h4>Price</h4>
                             <div class="row row1 scroll-pane">
                                 <div class="col col-4">
-                                    <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Rs 500 - Rs 700</label>
+                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>... - $50</label>
+                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>$50 - $100</label>
+                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>$100 - ...</label>
                                 </div>
-                                <div class="col col-4">
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 700 - Rs 1000</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 1000 - Rs 1500</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 1500 - Rs 2000</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 2000 - Rs 2500</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 2500 - Rs 3000</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 3500 - Rs 4000</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 4000 - Rs 4500</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 4500 - Rs 5000</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 5000 - Rs 5500</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 5500 - Rs 6000</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 6000 - Rs 6500</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 6500 - Rs 7000</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 7000 - Rs 7500</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 7500 - Rs 8000</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rs 8000 - Rs 8500</label>
-                                </div>
+                                <input type="button" >
                             </div>
-                        </section>
+                        </section>-->
                         <section class="sky-form">
-                            <h4>Brand Name</h4>
+                            <h4>Author Name</h4>
                             <div class="row row1 scroll-pane">
                                 <div class="col col-4">
-                                    <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>John Jacobs</label>
-                                </div>
-                                <div class="col col-4">
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Tag Heuer</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Lee Cooper</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Mikli</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>S Oliver</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Hackett</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Killer</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>IDEE</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Vogue</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Gunnar</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Accu Reader</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>CAT</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Excellent</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Feelgood</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Odysey</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Animal</label>
+                                    <ul class="kids">
+                                        <%
+                                            for(Author author : authorDAO.getAuthor()){
+                                        %>
+                                        <li><a href="engbookbyauthor.jsp?author=<%=author.getAuthorID() %>"><%=author.getAuthorName() %></a></li>
+                                        <%
+                                            }
+                                        %>
+                                    </ul>
                                 </div>
                             </div>
                         </section>
-                        <section class="sky-form">
-                            <h4>Frame Shape</h4>
-                            <div class="row row1 scroll-pane">
-                                <div class="col col-4">
-                                    <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Pilot</label>
-                                </div>
-                                <div class="col col-4">
-
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Rectangle</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Square</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Round</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Others</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Cat Eyes</label>
-                                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Wrap Around</label>
-
-                                </div>
-                            </div>
-                        </section>
-                        <section class="sky-form">
+                        
+<!--                        <section class="sky-form">
                             <h4>Frame Size</h4>
                             <div class="row row1 scroll-pane">
                                 <div class="col col-4">
@@ -308,8 +250,8 @@
                                     <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Large</label>
                                 </div>
                             </div>
-                        </section>
-                        <section class="sky-form">
+                        </section>-->
+<!--                        <section class="sky-form">
                             <h4>Frame Type</h4>
                             <div class="row row1 scroll-pane">
                                 <div class="col col-4">
@@ -322,8 +264,8 @@
                                     <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Half Rim</label>
                                 </div>
                             </div>
-                        </section>
-                        <section class="sky-form">
+                        </section>-->
+<!--                        <section class="sky-form">
                             <h4>Colors</h4>
                             <ul class="color-list">
                                 <li><a href="#"> <span class="color1"> </span>
@@ -348,7 +290,7 @@
                                         <p class="red">Gray</p>
                                     </a></li>
                             </ul>
-                        </section>
+                        </section>-->
                     </div>
                     <div class="clear"></div>
                 </div>

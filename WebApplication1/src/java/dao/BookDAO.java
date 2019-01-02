@@ -33,9 +33,38 @@ public class BookDAO {
                 book.setBookCode(rs.getString("BookCode"));
                 book.setBookName(rs.getString("Name"));
                 book.setBookPrice(rs.getFloat("Price"));
-                book.setAuthor(rs.getString("Author"));
+                book.setAuthor(rs.getInt("AuthorID"));
                 book.setNxb(rs.getString("NXB"));
                 //book.setBookCategory(rs.getInt("BookCategoryID"));
+                book.setBookDescription(rs.getString("BookDesciption"));
+                book.setBookImage(rs.getString("BookImage"));
+                list.add(book);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+    
+    //get danh sach san pham dua vao ma tacgia:
+    public ArrayList<Book> getListBookByAuthor(int authorID) throws ClassNotFoundException{
+        Connection conn = ConnectDB.getConnectionDB();
+        String sql = "SELECT * FROM dbo.BOOK WHERE AuthorID='"+authorID+"'";
+        ArrayList<Book> list = new ArrayList<>();
+        
+        try {
+            PreparedStatement ps = conn.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Book book = new Book();
+                book.setBookCode(rs.getString("BookCode"));
+                book.setBookName(rs.getString("Name"));
+                book.setBookPrice(rs.getFloat("Price"));
+                book.setAuthor(rs.getInt("AuthorID"));
+                book.setNxb(rs.getString("NXB"));
+                book.setBookCategory(rs.getInt("BookCategoryID"));
                 book.setBookDescription(rs.getString("BookDesciption"));
                 book.setBookImage(rs.getString("BookImage"));
                 list.add(book);
@@ -62,7 +91,7 @@ public class BookDAO {
                 book.setBookCode(rs.getString("BookCode"));
                 book.setBookName(rs.getString("Name"));
                 book.setBookPrice(rs.getFloat("Price"));
-                book.setAuthor(rs.getString("Author"));
+                book.setAuthor(rs.getInt("AuthorID"));
                 book.setNxb(rs.getString("NXB"));
                 book.setBookCategory(rs.getInt("BookCategoryID"));
                 book.setBookDescription(rs.getString("BookDesciption"));
@@ -77,5 +106,6 @@ public class BookDAO {
         return b;
     }
     
-
+    
+    
 }
