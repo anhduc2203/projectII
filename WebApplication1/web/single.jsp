@@ -4,6 +4,7 @@
     Author     : unknown_HUST
 --%>
 
+<%@page import="model.Cart"%>
 <%@page import="dao.AuthorDAO"%>
 <%@page import="model.Author"%>
 <%@page import="model.Category"%>
@@ -76,6 +77,11 @@
             if(request.getParameter("bookID") != null){
                 bookID = request.getParameter("bookID");
             }
+            Cart cart = (Cart) session.getAttribute("cart");
+            if (cart==null){
+                cart = new Cart();
+                session.setAttribute("cart", cart);
+            }
         %>
         
         <jsp:include page="header.jsp"></jsp:include>
@@ -105,10 +111,10 @@
                         <div class="desc1 span_3_of_2">
                             <h3 class="m_3"><%=b.getBookName() %></h3>
                             <p class="m_text2">Author: <%=aut %> </p>
-                            <p class="m_5">Price: $<%=b.getBookPrice() %> <a href="#">click for offer</a></p>
+                            <p class="m_5">Price: $<%=b.getBookPrice() %></p>
                             <div class="btn_form">
                                 <form>
-                                    <input type="submit" value="buy" title="">
+                                    <a href="CartServlet?command=plus&bookID=<%=b.getBookCode()%>" class="hvr-shutter-in-vertical hvr-shutter-in-vertical2 ">ADD TO CART</a>
                                 </form>
                             </div>
                             <!--<span class="m_link"><a href="#">login to save in wishlist</a> </span>-->

@@ -4,6 +4,11 @@
     Author     : unknown_HUST
 --%>
 
+<%@page import="org.apache.catalina.ant.ListTask"%>
+<%@page import="model.Item"%>
+<%@page import="java.util.Map"%>
+<%@page import="model.Cart"%>
+<%@page import="model.Account"%>
 <%@page import="model.Category"%>
 <%@page import="dao.CategoryDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -35,6 +40,15 @@
 
         <%
             CategoryDAO categoryDAO = new CategoryDAO();
+            Account account = null;
+            if (session.getAttribute("account")!=null){
+                account = (Account) session.getAttribute("account");
+            }
+            Cart cart = (Cart) session.getAttribute("cart");
+            if(cart == null){
+                cart = new Cart();
+                session.setAttribute("cart", cart);
+            }
         %>
 
         <div class="header-top">
@@ -139,21 +153,43 @@
                                     </li>
                                 </ul>
                             </li>
-                        </ul>
+                        </ul
+                        
+                        <!--Phan gio hang-->
                         <ul class="icon1 sub-icon1 profile_img">
                             <li><a class="active-icon c2" href="#"> </a>
                                 <ul class="sub-icon1 list">
-                                    <li>
-                                        <h3>No Products</h3><a href=""></a>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetuer <a href="#">adipiscing elit, sed diam</a></p>
-                                    </li>
+
+                                    <!--Hien thi gio hang phan header-->
+                                    <div class="shopping_cart">
+                                        
+                                        <% for (Map.Entry<String, Item> list : cart.getCartItem().entrySet()) {%>
+                                        <div class="cart_box">
+                                            <div class="message">
+                                                <div class="alert-close"> </div> 
+                                                <div class="list_img"><img src="<%=list.getValue().getBook().getBookImage()%>" class="img-responsive" alt=""></div>
+                                                <div class="list_desc"><h4><a href="CartServlet?command=remove&bookID=<%=list.getValue().getBook().getBookCode()%>"><%=list.getValue().getBook().getBookName()%></a></h4>
+                                                    <%=list.getValue().getQuantity()%> x<span class="actual">$<%=list.getValue().getBook().getBookPrice()%></span>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <%}%>
+                                        
+                                    </div>
+                                    <div class="total">
+                                        <div class="total_left">CartSubtotal : </div>
+                                        <div class="total_right">$<%=cart.totalCart()%></div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                    <!--Hien thi gio hang phan header-->
+
+
                                 </ul>
                             </li>
                         </ul>
                         <ul class="last">
-                            <li><a href="#">Cart(0)</a></li>
+                            <li><a href="#">Cart(<%=cart.countItem()%>)</a></li>
                         </ul>
                     </div>
                 </div>

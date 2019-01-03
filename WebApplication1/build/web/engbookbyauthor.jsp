@@ -54,7 +54,7 @@
                 <div class="wrap">
                     <div class="cont span_2_of_3">
                         <%
-                            String s = categoryDAO.getCategory(Integer.parseInt(authorID));
+                            String s = authorDAO.getAuthorByID(Integer.parseInt(authorID));
                         %>
                         <h2 class="head"><%=s %></h2>
                         <div class="mens-toolbar">

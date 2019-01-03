@@ -35,7 +35,6 @@
             BookDAO bookDAO = new BookDAO();
         %>
 
-
         <jsp:include page="header.jsp"></jsp:include>
             <!--phan nay la banner-->
             <div id="fwslider">

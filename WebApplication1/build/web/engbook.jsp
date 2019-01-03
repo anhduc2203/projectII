@@ -120,7 +120,7 @@
                             %>
                             
                             <div class="col_1_of_3 span_1_of_3">
-                                
+                                <a href="single.jsp?bookID=<%=b.getBookCode() %>">
                                     <div class="inner_content clearfix">
                                         <div class="product_image">
                                             <img src="<%=b.getBookImage() %>" alt="<%=b.getBookName() %>" />
@@ -132,13 +132,11 @@
                                                     <span class="actual">$<%=b.getBookPrice() %></span>
                                                 </div>
                                             </div>
-                                            <div class="cart-right"> 
-                                                <a href="CartServlet?command=plus&bookID=<%=b.getBookCode() %>"></a>
-                                            </div>
+                                            <div class="cart-right"> </div>
                                             <div class="clear"></div>
                                         </div>
                                     </div>
-                                
+                                </a>
                             </div>
                             <%
                                 }

@@ -1,21 +1,15 @@
-create trigger tr_NextUserCode on dbo.USERS
-for insert
-as
-	begin
-		declare @lastBookCode varchar(10)
-		set @lastBookCode = (select top 1 UserCode from dbo.USERS order by UserCode desc)
-		update dbo.USERS set UserCode = dbo.func_NextID(@lastBookCode, 'USER', 10) where UserCode=''
-	end
-
-	insert into dbo.USERS values(
-	'', 
-	'abc4',
-	'123456',
-	'1234',
-	'1345',
-	'1234123',
-	'1234123',
-	'12341234',
-	'124312',
-	'13412'
-	)
+USE [BOOKSHOP]
+GO
+/****** Object:  Trigger [dbo].[tr_NextUserCode]    Script Date: 1/3/2019 4:10:31 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER TRIGGER [dbo].[tr_NextUserCode] ON [dbo].[USERS]
+FOR INSERT
+AS
+	BEGIN
+		DECLARE @lastBookCode VARCHAR(10)
+		SET @lastBookCode = (SELECT TOP 1 UserCode FROM dbo.USERS ORDER BY UserCode DESC)
+		UPDATE dbo.USERS SET UserCode = dbo.func_NextID(@lastBookCode,'USER',10) WHERE UserCode=''
+	END

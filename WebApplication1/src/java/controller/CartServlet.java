@@ -36,7 +36,7 @@ public class CartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String command = request.getParameter("cammand");
+        String command = request.getParameter("command");
         String bookID = request.getParameter("bookID");
         Cart cart = (Cart) session.getAttribute("cart");
         
@@ -44,11 +44,15 @@ public class CartServlet extends HttpServlet {
             Book book = bookDAO.getBookByBookID(bookID);
             switch(command){
                 case "plus":
+                    System.out.println("Command: "+command);
                     if(cart.getCartItem().containsKey(bookID)){
                         cart.plusToCart(bookID, new Item(book, cart.getCartItem().get(bookID).getQuantity()));
                     }else{
                         cart.plusToCart(bookID, new Item(book, 1));
                     }
+                    break;
+                case "remove":
+                    cart.removeToCart(bookID);
                     break;
             }
             

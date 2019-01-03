@@ -14,28 +14,13 @@ import java.sql.Statement;
 
 /**
  *
- * @author unknown_HUST
+ * @author AnhDuc
  */
 public class ConnectDB {
-    /*
-    public static Connection getConnectionDB() {
-        Connection conn = null;
-        String connectURL = "jdbc:sqlserver://localhost:1433; databaseName=BOOKSHOP2; user=sa; password=123456;";
-        try {
-            conn = DriverManager.getConnection(connectURL);
-            if(conn != null) System.out.println(" Connect Success!!!");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return conn;
-    }
-    */
-    
-    
-    //public static void main(String[] args) throws ClassNotFoundException {
+  
     public static Connection getConnectionDB() throws ClassNotFoundException{
         Connection conn = null;
-        String dbName = "BOOKSHOP2";
+        String dbName = "BOOKSHOP";
         
         String url = "jdbc:sqlserver://localhost:1433; databaseName=" + dbName + "";
         Statement stmt = null;
@@ -50,20 +35,7 @@ public class ConnectDB {
             if (conn != null) {
                 System.out.println("Ket noi thanh cong !!!");
             }
-            /*
-            stmt = conn.createStatement();
-            result = null;
-            String us;
-            result = stmt.executeQuery("select * from USERS ");
-
-            while (result.next()) {
-                us = result.getString("UserName");
-                              
-                System.out.println(us);
-            }
-
-            conn.close();
-            */
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
