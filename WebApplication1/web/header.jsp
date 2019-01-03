@@ -180,8 +180,13 @@
                                     <div class="total">
                                         <div class="total_left">CartSubtotal : </div>
                                         <div class="total_right">$<%=cart.totalCart()%></div>
-                                        <div class="clearfix"> </div>
+                                        <div class="clearfix"></div>
                                     </div>
+                                    <div>
+                                        <div class="check_button"><a href="checkout.jsp">Check out</a></div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="clearfix"></div>
                                     <!--Hien thi gio hang phan header-->
 
 

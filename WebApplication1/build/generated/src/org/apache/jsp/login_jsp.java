@@ -61,6 +61,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <script src=\"js/jquery.easydropdown.js\"></script>\r\n");
       out.write("    </head>\r\n");
       out.write("    <body>\r\n");
+      out.write("        \r\n");
       out.write("        ");
       org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "header.jsp", out, false);
       out.write("\r\n");
@@ -70,6 +71,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                <div class=\"col_1_of_login span_1_of_login\">\r\n");
       out.write("                    <h4 class=\"title\">New Account</h4>\r\n");
       out.write("                    <p>Nếu bạn chưa có tài khoản hãy tạo một tài khoản mới để sử dụng dịch vụ của chúng tôi!</p>\r\n");
+      out.write("                    <br>\r\n");
       out.write("                    <div class=\"button1\">\r\n");
       out.write("                        <a href=\"register.jsp\"><input type=\"submit\" name=\"Submit\" value=\"Create an Account\"></a>\r\n");
       out.write("                    </div>\r\n");
@@ -79,11 +81,23 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <div class=\"login-title\">\r\n");
       out.write("                        <h4 class=\"title\">Đăng nhập</h4>\r\n");
       out.write("                        <div id=\"loginbox\" class=\"loginbox\">\r\n");
-      out.write("                            <form action=\"\" method=\"post\" name=\"login\" id=\"login-form\">\r\n");
+      out.write("                            <form action=\"AccountServlet\" method=\"post\" name=\"login\" id=\"login-form\">\r\n");
+      out.write("                                \r\n");
+      out.write("                                ");
+if (request.getParameter("error") != null) {
+      out.write("\r\n");
+      out.write("                                <div>\r\n");
+      out.write("                                    <p style=\"color: red\">");
+      out.print(request.getParameter("error") );
+      out.write("</p>\r\n");
+      out.write("                                </div>\r\n");
+      out.write("                                ");
+}
+      out.write("\r\n");
       out.write("                                <fieldset class=\"input\">\r\n");
       out.write("                                    <p id=\"login-form-username\">\r\n");
       out.write("                                        <label for=\"modlgn_username\">Tên đăng nhập</label>\r\n");
-      out.write("                                        <input id=\"modlgn_username\" type=\"text\" name=\"email\" class=\"inputbox\" size=\"18\" autocomplete=\"off\">\r\n");
+      out.write("                                        <input id=\"modlgn_username\" type=\"text\" name=\"username\" class=\"inputbox\" size=\"18\" autocomplete=\"off\">\r\n");
       out.write("                                    </p>\r\n");
       out.write("                                    <p id=\"login-form-password\">\r\n");
       out.write("                                        <label for=\"modlgn_passwd\">Mật khẩu</label>\r\n");
@@ -91,9 +105,11 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                    </p>\r\n");
       out.write("                                    <div class=\"remember\">\r\n");
       out.write("                                        <p id=\"login-form-remember\">\r\n");
-      out.write("                                            <label for=\"modlgn_remember\"><a href=\"#\">Forget Your Password ? </a></label>\r\n");
+      out.write("                                            <label for=\"modlgn_remember\"><a href=\"#\">Forget Your Password ?</a></label>\r\n");
       out.write("                                        </p>\r\n");
-      out.write("                                        <input type=\"submit\" name=\"Submit\" class=\"button\" value=\"Login\">\r\n");
+      out.write("                                        <p>\r\n");
+      out.write("                                        <button class=\"grey\" type=\"hidden\" value=\"login\" name=\"command\">Login</button>\r\n");
+      out.write("                                        </p>\r\n");
       out.write("                                        <div class=\"clear\"></div>\r\n");
       out.write("                                    </div>\r\n");
       out.write("                                </fieldset>\r\n");

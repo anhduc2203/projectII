@@ -22,6 +22,7 @@
         <script src="js/jquery.easydropdown.js"></script>
     </head>
     <body>
+        
         <jsp:include page="header.jsp"></jsp:include>
         
         <div class="login">
@@ -29,6 +30,7 @@
                 <div class="col_1_of_login span_1_of_login">
                     <h4 class="title">New Account</h4>
                     <p>Nếu bạn chưa có tài khoản hãy tạo một tài khoản mới để sử dụng dịch vụ của chúng tôi!</p>
+                    <br>
                     <div class="button1">
                         <a href="register.jsp"><input type="submit" name="Submit" value="Create an Account"></a>
                     </div>
@@ -56,8 +58,9 @@
                                     </p>
                                     <div class="remember">
                                         <p id="login-form-remember">
-                                            <label for="modlgn_remember"><a href="#">Forget Your Password ? </a></label>
+                                            <label for="modlgn_remember"><a href="#">Forget Your Password ?</a></label>
                                         </p>
+                                        
                                         <button class="grey" type="hidden" value="login" name="command">Login</button>
                                         
                                         <div class="clear"></div>

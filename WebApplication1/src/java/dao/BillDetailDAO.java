@@ -23,8 +23,8 @@ public class BillDetailDAO {
         String sql = "insert into BILL_DETAIL values(?,?,?,?,?)";
         PreparedStatement ps = conn.prepareCall(sql);
         
-        ps.setString(1, bd.getBillDetailID());
-        ps.setString(2, bd.getBillID());
+        ps.setLong(1, bd.getBillDetailID());
+        ps.setLong(2, bd.getBillID());
         ps.setString(3, bd.getBookID());
         ps.setDouble(4, bd.getPrice());
         ps.setInt(5, bd.getQuantity());
@@ -32,10 +32,6 @@ public class BillDetailDAO {
         ps.executeUpdate();
     }
     
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        
-        new BillDetailDAO().insertBillDetail(new BillDetail("b01", "b01", "b01", 100, 2));
     
-    }
     
 }

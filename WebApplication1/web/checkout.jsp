@@ -4,6 +4,7 @@
     Author     : AnhDuc
 --%>
 
+<%@page import="model.Account"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -28,6 +29,12 @@
 	<script src="js/jquery.easydropdown.js"></script>
     </head>
     <body>
+        <%
+            Account account = (Account) session.getAttribute("account");
+            if (account == null){
+                response.sendRedirect("/WebApplication1/login.jsp");
+            }
+        %>
         
         <jsp:include page="header.jsp"></jsp:include>
         
@@ -45,7 +52,7 @@
                         <div class="login-title">
                             <h4 class="title">Mời bạn nhập thông tin thanh toán</h4>
                             <div id="loginbox" class="loginbox">
-                                <form action="AccountServlet" method="post" name="login" id="login-form">
+                                <form action="CheckOutServlet" method="post" name="login" id="login-form">
                                 <fieldset class="input">
                                     <div>
                                         <span>Địa chỉ giao hàng</span>

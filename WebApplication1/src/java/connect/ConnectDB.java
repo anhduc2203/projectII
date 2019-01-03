@@ -20,7 +20,7 @@ public class ConnectDB {
   
     public static Connection getConnectionDB() throws ClassNotFoundException{
         Connection conn = null;
-        String dbName = "BOOKSHOP";
+        String dbName = "BOOKSHOP2";
         
         String url = "jdbc:sqlserver://localhost:1433; databaseName=" + dbName + "";
         Statement stmt = null;
