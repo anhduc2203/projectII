@@ -20,6 +20,10 @@
         <servlet-name>CheckOutServlet</servlet-name>
         <servlet-class>controller.CheckOutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManagerCategoryServlet</servlet-name>
+        <servlet-class>controller.ManagerCategoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AccountServlet</servlet-name>
         <url-pattern>/AccountServlet</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>CheckOutServlet</servlet-name>
         <url-pattern>/CheckOutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerCategoryServlet</servlet-name>
+        <url-pattern>/ManagerCategoryServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

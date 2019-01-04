@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/DA2/projectII/projectII/WebApplication1/web/checkout.jsp</file>
-            <file>file:/D:/DA2/projectII/projectII/WebApplication1/src/java/controller/CheckOutServlet.java</file>
-            <file>file:/D:/DA2/projectII/projectII/WebApplication1/web/index.jsp</file>
-            <file>file:/D:/DA2/projectII/projectII/WebApplication1/src/java/model/BillDetail.java</file>
-            <file>file:/D:/DA2/projectII/projectII/WebApplication1/src/java/dao/BillDetailDAO.java</file>
-            <file>file:/D:/DA2/projectII/projectII/WebApplication1/src/java/dao/BillDAO.java</file>
-            <file>file:/D:/DA2/projectII/projectII/WebApplication1/web/login.jsp</file>
-            <file>file:/D:/DA2/projectII/projectII/WebApplication1/src/java/model/Bill.java</file>
+            <file>file:/D:/DA2/projectII/projectII/WebApplication1/src/java/dao/CategoryDAO.java</file>
+            <file>file:/D:/DA2/projectII/projectII/WebApplication1/web/admin/manage_category.jsp</file>
+            <file>file:/D:/DA2/projectII/projectII/WebApplication1/web/admin/update_category.jsp</file>
+            <file>file:/D:/DA2/projectII/projectII/WebApplication1/web/admin/insert_category.jsp</file>
+            <file>file:/D:/DA2/projectII/projectII/WebApplication1/web/css/mos-style.css</file>
+            <file>file:/D:/DA2/projectII/projectII/WebApplication1/src/java/controller/ManagerCategoryServlet.java</file>
         </group>
     </open-files>
 </project-private>
